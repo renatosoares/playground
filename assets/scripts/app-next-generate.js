@@ -22,7 +22,7 @@ function createRequest() {
 
 function getBoardsSold() {
     createRequest();
-    var url = "../app/modules/headrushajax/getupdatedBoardSales-ajax.php";
+    var url = "/app/modules/appNextGererate/getUpdateSales.php";
     /*o valor de entrada final não deixa a página travado enquanto espera resposta, assíncrono */
     request.open("GET", url, true);
     /* navegador deve executar sempre que o estado de prontidão da solicitação mudar */
@@ -34,8 +34,8 @@ function getBoardsSold() {
 }
 
 function updatePage() {
-    if (request.readyState == 4) {
-        var newTotal = request.responseText;
+    if (request.readyState == 4) { /* evita que com qualquer valor os dados seja alterados*/
+        var newTotal = request.responseText; // retorna uma string da consulta do servidor
         var boardsSoldEl = document.getElementById("boards-sold");
         var cashEl = document.getElementById("cash");
         replaceText(boardsSoldEl, newTotal);
@@ -50,8 +50,12 @@ function updatePage() {
         var cashPerBoard = price - cost;
         var cash = cashPerBoard * newTotal;
 
-        /* Atualiza o lucro do formulário */
+        /* Atualiza o lucro do formulário , pog para arrendodar para apenas duas casas decimais*/
         cash = Math.round(cash * 100) / 100;
         replaceText(cashEl, cash);
     }
 }
+
+window.onload = function() {
+    document.getElementById('update-value').onclick = getBoardsSold;
+};
