@@ -23,6 +23,7 @@ function createRequest() {
 function getBoardsSold() {
     createRequest();
     var url = "/app/modules/appNextGererate/getUpdateSales.php";
+    url = url + "?dummy=" + new Date().getTime();
     /*o valor de entrada final não deixa a página travado enquanto espera resposta, assíncrono */
     request.open("GET", url, true);
     /* navegador deve executar sempre que o estado de prontidão da solicitação mudar */

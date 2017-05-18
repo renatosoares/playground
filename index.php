@@ -19,7 +19,13 @@
 </head>
 <body>
 <h1>Hello, world!</h1>
-
+<?php
+foreach (new DirectoryIterator(__DIR__) as $file) {
+    if ($file->isFile()) {
+        print "<a href='" . $file->getFilename() . "'>" . $file->getFilename() . "</a><br><br>";
+    }
+}
+?>
 
 <form action="/" method="post">
     <div class="test">
