@@ -42,5 +42,7 @@ srand((double)microtime() * 1000000);
 $customerId = rand(0,3);
 $customer = $customers[$customerId];
 
+$phone = preg_replace("/[\. \(\)\-]/", "", $_REQUEST['phone']);
+
 echo $customer->getName() . "\n" .
     $customer->getAddress();

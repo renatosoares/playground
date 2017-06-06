@@ -1,5 +1,8 @@
 function getCustomerInfo() {
     var phone = document.getElementById("phone").value;
+    if (validatePhone(phone) == false) {
+        return;
+    }
     var url = "app/modules/order-delivery/order-delivery-lookupCustomer.php?phone=" +
         escape(phone);
     request.open("GET", url, true);
@@ -28,28 +31,26 @@ function submitOrder() {
     var url = "app/modules/order-delivery/order-delivery-placeOrder.php";
     request.open("POST", url, true);
     request.onreadystatechange = showConfirmation;
-    request.setRequestHeader("Content-Type",
-        "application/x-www-form-urlencoded");
-    request.send("phone=" + escape(phone) +
-        "&address=" + escape(address) +
-        "&order=" + escape(order));
+    // informa ao servidor que os dados estão codificados
+    request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    request.send("phone=" + escape(phone) + "&address=" + escape(address) + "&order=" + escape(order));
 }
 
 function showConfirmation() {
     if (request.readyState == 4) {
         if (request.status == 200) {
             var response = request.responseText;
-            // Locate form on page
+            // localizar o formulário na página
             var mainDiv = document.getElementById("main-page");
             var orderForm = document.getElementById("order-form");
 
-            // Create some confirmation text
+            // Criar um texto de confirmação
             pElement = document.createElement("p");
             textNode = document.createTextNode("Your order should arrive within " +
                 response + " minutes. Enjoy your pizza!");
             pElement.appendChild(textNode);
 
-            // Replace the form with the confirmation
+            // substituir o formulário com a confirmação
             mainDiv.replaceChild(pElement, orderForm);
         } else {
             var message = request.getResponseHeader("Status");
