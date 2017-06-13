@@ -1,0 +1,24 @@
+{
+  "name": "Playground",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Renato Soares <renatosoarespro@hotmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/renatosoares/playground",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "assets/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "bootstrap": "v4.0.0-alpha.6",
+    "normalize-css": "^6.0.0",
+    "font-awesome": "font-awsome#^4.7.0"
+  }
+}
